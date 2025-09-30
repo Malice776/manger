@@ -187,7 +187,7 @@ elif page == '📋 Tableau':
                     st.success(f'✅ {nom} ajouté dans Google Sheets!')
                 
                 st.session_state['refresh'] = True
-                # Aucun st.experimental_rerun(), le re-run se fera automatiquement au prochain run
+                st.rerun()  # Pour rafraîchir le tableau
 
     st.divider()
 
