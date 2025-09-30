@@ -145,7 +145,7 @@ if page == '📊 Graphiques':
             st.plotly_chart(fig3, use_container_width=True)
 
             fig3.update_layout(
-                title_font_size=24,          # taille du titre
+                title_font_size=32,          # taille du titre
                 legend=dict(
                     font=dict(size=32)       # taille de la légende
                 )
