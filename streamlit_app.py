@@ -138,7 +138,7 @@ if page == '📊 Graphiques':
                 title='Répartition des visites par restaurant',
                 hole=0.3,  # donut
                 labels={'visites': 'Nombre de visites'},
-                width=800, height=800
+                width=650, height=650
             )
             fig3.update_traces(texttemplate='%{value}')  # affiche les valeurs exactes
             st.plotly_chart(fig3, use_container_width=True)
