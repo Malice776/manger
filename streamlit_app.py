@@ -237,6 +237,46 @@ elif page == '📋 Tableau':
 # ------------------------
 # Pages Calendrier / Admin
 # ------------------------
+# elif page == '📅 Choix aléatoire':
+#     st.title('🎰 Roulette du restaurant')
+
+#     df = read_sheet_to_df()
+#     if df.empty:
+#         st.info('ℹ️ Aucune donnée – ajoutez des restaurants dans Google Sheets')
+#     else:
+#         numeric_cols = ['Marine', 'Corentin', 'Quentin']
+#         for col in numeric_cols:
+#             if col in df.columns:
+#                 df[col] = pd.to_numeric(df[col], errors='coerce')
+
+#         df['moyenne'] = df[numeric_cols].mean(axis=1)
+#         df = df.dropna(subset=['moyenne'])
+
+#         if df.empty:
+#             st.warning('⚠️ Les restaurants n’ont pas de notes valides')
+#         else:
+#             st.subheader("🎯 Tourner la roulette !")
+#             st.write("Plus la note moyenne est haute, plus le restaurant a de chance d'être choisi.")
+
+#             import numpy as np
+
+#             # Quand on appuie sur le bouton, choisir un restaurant pondéré par la moyenne
+#             if st.button('🔄 Lancer la roulette'):
+#                 # Ajouter 0.1 pour éviter zéro poids
+#                 probabilities = df['moyenne'].values + 0.1
+#                 probabilities = probabilities / probabilities.sum()
+#                 chosen = np.random.choice(df['nom'], p=probabilities)
+#                 st.success(f'🎉 Aujourd\'hui, on mange chez **{chosen}** !')
+                
+#                 # Optionnel : afficher les probabilités
+#                 st.subheader("Probabilités de chaque restaurant")
+#                 df_probs = df[['nom', 'moyenne']].copy()
+#                 df_probs['Probabilité'] = probabilities
+#                 st.dataframe(df_probs.sort_values('Probabilité', ascending=False))
+import numpy as np
+import time
+import streamlit as st
+
 elif page == '📅 Choix aléatoire':
     st.title('🎰 Roulette du restaurant')
 
@@ -258,16 +298,23 @@ elif page == '📅 Choix aléatoire':
             st.subheader("🎯 Tourner la roulette !")
             st.write("Plus la note moyenne est haute, plus le restaurant a de chance d'être choisi.")
 
-            import numpy as np
-
-            # Quand on appuie sur le bouton, choisir un restaurant pondéré par la moyenne
             if st.button('🔄 Lancer la roulette'):
-                # Ajouter 0.1 pour éviter zéro poids
                 probabilities = df['moyenne'].values + 0.1
                 probabilities = probabilities / probabilities.sum()
-                chosen = np.random.choice(df['nom'], p=probabilities)
-                st.success(f'🎉 Aujourd\'hui, on mange chez **{chosen}** !')
-                
+
+                # Conteneur pour l'effet roulette
+                placeholder = st.empty()
+
+                # Faire “tourner la roulette”
+                for _ in range(20):  # nombre de tours
+                    chosen = np.random.choice(df['nom'], p=probabilities)
+                    placeholder.markdown(f"🎲 Choix en cours… **{chosen}**")
+                    time.sleep(0.1)  # vitesse du tour
+
+                # Résultat final
+                chosen_final = np.random.choice(df['nom'], p=probabilities)
+                placeholder.success(f'🎉 Aujourd\'hui, on mange chez **{chosen_final}** !')
+
                 # Optionnel : afficher les probabilités
                 st.subheader("Probabilités de chaque restaurant")
                 df_probs = df[['nom', 'moyenne']].copy()
