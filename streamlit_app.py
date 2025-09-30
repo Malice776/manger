@@ -204,7 +204,8 @@ elif page == '📋 Tableau':
                 delete_restaurant_from_sheet(to_delete)
                 st.success(f'✅ {to_delete} supprimé de Google Sheets!')
                 st.session_state['refresh'] = True
-                # Pas besoin de st.experimental_rerun()
+                st.rerun()  # Pour rafraîchir le tableau
+                
             else:
                 st.warning('⚠️ Veuillez sélectionner un restaurant')
 
