@@ -142,8 +142,20 @@ if page == '📊 Graphiques':
 # ------------------------
 elif page == '📋 Tableau':
     st.title('📋 Gestion des Restaurants')
+
+    # Initialisation session_state pour le refresh
+    if 'refresh' not in st.session_state:
+        st.session_state['refresh'] = False
+
+    # Lecture du DataFrame
     df = read_sheet_to_df()
 
+    # Rafraîchir si nécessaire
+    if st.session_state['refresh']:
+        df = read_sheet_to_df()
+        st.session_state['refresh'] = False
+
+    # Affichage du tableau
     if not df.empty:
         st.dataframe(df, use_container_width=True, height=400)
         st.caption(f'Total: {len(df)} restaurants')
@@ -173,9 +185,11 @@ elif page == '📋 Tableau':
                 else:
                     add_restaurant_to_sheet(nom.strip(), marine, corentin, quentin, visites)
                     st.success(f'✅ {nom} ajouté dans Google Sheets!')
+                
                 st.session_state['refresh'] = True
-                st.stop()
+                st.experimental_rerun()
 
+    st.divider()
 
     # Formulaire de suppression
     st.subheader('🗑️ Supprimer un restaurant')
@@ -186,8 +200,7 @@ elif page == '📋 Tableau':
                 delete_restaurant_from_sheet(to_delete)
                 st.success(f'✅ {to_delete} supprimé de Google Sheets!')
                 st.session_state['refresh'] = True
-                st.stop()
-
+                st.experimental_rerun()
             else:
                 st.warning('⚠️ Veuillez sélectionner un restaurant')
 
