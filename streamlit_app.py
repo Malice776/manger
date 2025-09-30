@@ -156,9 +156,9 @@ elif page == '📋 Tableau':
     st.subheader('➕ Ajouter / Modifier un restaurant')
     with st.form('entry_form'):
         nom = st.text_input('Nom du restaurant *', placeholder='Ex: McDo')
-        marine = st.number_input('Note Marine (0-10)', min_value=0.0, max_value=10.0, step=0.5, value=5.0, format="%.1f")
-        corentin = st.number_input('Note Corentin (0-10)', min_value=0.0, max_value=10.0, step=0.5, value=5.0, format="%.1f")
-        quentin = st.number_input('Note Quentin (0-10)', min_value=0.0, max_value=10.0, step=0.5, value=5.0, format="%.1f")
+        marine = st.number_input('Note Marine (0-10)', min_value=0.0, max_value=10.0, step=1, value=5.0, format="%.1f")
+        corentin = st.number_input('Note Corentin (0-10)', min_value=0.0, max_value=10.0, step=1, value=5.0, format="%.1f")
+        quentin = st.number_input('Note Quentin (0-10)', min_value=0.0, max_value=10.0, step=1, value=5.0, format="%.1f")
         visites = st.number_input('Combien de fois mangé', min_value=1, step=1, value=1)
         
         submit = st.form_submit_button('💾 Enregistrer', type='primary')
