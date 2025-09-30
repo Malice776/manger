@@ -5,7 +5,6 @@ import pandas as pd
 from google.oauth2.service_account import Credentials
 import streamlit as st
 
-
 # Variables d'environnement
 GOOGLE_CREDS_JSON = os.getenv("GOOGLE_CREDS_JSON", "./credentials/service_account.json")
 SHEET_ID = os.getenv("SHEET_ID", "14HCjCU-ejwi93ygofSetYDS0VlS4cXjcnjA9WqYx3Uk")
@@ -18,7 +17,6 @@ scope = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-
 def get_gsheet_client():
     scopes = ["https://www.googleapis.com/auth/spreadsheets"]
     creds = Credentials.from_service_account_info(
@@ -26,7 +24,6 @@ def get_gsheet_client():
     )
     client = gspread.authorize(creds)
     return client
-
 
 def normalize_decimal(value):
     """Convertit les virgules en points pour les nombres"""
@@ -69,16 +66,11 @@ def add_restaurant_to_sheet(nom, marine, corentin, quentin, visites):
     sh = client.open_by_key(SHEET_ID)
     ws = sh.worksheet(WORKSHEET_NAME)
     
-    # # Calculer la moyenne
-    # moyenne = round((marine + corentin + quentin) / 3, 2)
-    
-    # # Formater avec virgules pour Google Sheets
-    # marine_str = str(marine).replace('.', ',')
-    # corentin_str = str(corentin).replace('.', ',')
-    # quentin_str = str(quentin).replace('.', ',')
-    # moyenne_str = str(moyenne).replace('.', ',')
-    
-    # Ajouter la ligne à la fin
+    # Formater les valeurs pour Google Sheets
+    marine_str = str(marine).replace('.', ',')
+    corentin_str = str(corentin).replace('.', ',')
+    quentin_str = str(quentin).replace('.', ',')
+
     new_row = [nom, marine_str, corentin_str, quentin_str, visites]
     ws.append_row(new_row)
     
@@ -90,21 +82,15 @@ def update_restaurant_in_sheet(nom, marine, corentin, quentin, visites):
     sh = client.open_by_key(SHEET_ID)
     ws = sh.worksheet(WORKSHEET_NAME)
     
-    # Trouver la ligne du restaurant
     try:
         cell = ws.find(nom)
         row_number = cell.row
         
-        # # Calculer la moyenne
-        # moyenne = round((marine + corentin + quentin) / 3, 2)
-        
-        # # Formater avec virgules
-        # marine_str = str(marine).replace('.', ',')
-        # corentin_str = str(corentin).replace('.', ',')
-        # quentin_str = str(quentin).replace('.', ',')
-        # moyenne_str = str(moyenne).replace('.', ',')
-        
-        # Mettre à jour la ligne
+        # Formater les valeurs
+        marine_str = str(marine).replace('.', ',')
+        corentin_str = str(corentin).replace('.', ',')
+        quentin_str = str(quentin).replace('.', ',')
+
         updated_row = [nom, marine_str, corentin_str, quentin_str, visites]
         ws.update(f'A{row_number}:E{row_number}', [updated_row])
 
@@ -133,7 +119,6 @@ def restaurant_exists(nom):
     return nom in df['nom'].values
 
 if __name__ == "__main__":
-    # Test de lecture
     df = read_sheet_to_df()
     print(f"Lecture de {len(df)} restaurants depuis Google Sheets")
     print(df.head())
