@@ -137,7 +137,7 @@ if page == '📊 Graphiques':
                 values='visites',
                 title='Répartition des visites par restaurant',
                 hole=0.3,  # donut
-                labels={'visites': 'Nombre de visites'}
+                labels={'visites': 'Nombre de visites'},
                 width=600, height=500
             )
             fig3.update_traces(texttemplate='%{value}')  # affiche les valeurs exactes
