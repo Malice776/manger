@@ -187,7 +187,7 @@ elif page == '📋 Tableau':
                     st.success(f'✅ {nom} ajouté dans Google Sheets!')
                 
                 st.session_state['refresh'] = True
-                st.experimental_rerun()
+                # Aucun st.experimental_rerun(), le re-run se fera automatiquement au prochain run
 
     st.divider()
 
@@ -200,9 +200,10 @@ elif page == '📋 Tableau':
                 delete_restaurant_from_sheet(to_delete)
                 st.success(f'✅ {to_delete} supprimé de Google Sheets!')
                 st.session_state['refresh'] = True
-                st.experimental_rerun()
+                # Pas besoin de st.experimental_rerun()
             else:
                 st.warning('⚠️ Veuillez sélectionner un restaurant')
+
 
 # ------------------------
 # Pages Calendrier / Admin
