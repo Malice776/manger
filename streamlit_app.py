@@ -278,7 +278,7 @@ elif page == '📅 Choix aléatoire':
                 # Résultat final
                 chosen_final = np.random.choice(df['nom'], p=probabilities)
                 placeholder.success(f'🎉 Aujourd\'hui, on mange chez **{chosen_final}** !')
-                st.video('https://youtu.be/xvFZjo5PgG0', autoplay=True,end_time="15s",width=550)  # Rickroll
+                st.video('https://youtu.be/xvFZjo5PgG0', autoplay=True,end_time="20s",width=550)  # Rickroll
                 st.write("Bon appétit ! 🍽️",)
                 
                 
