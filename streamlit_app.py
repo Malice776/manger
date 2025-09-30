@@ -10,6 +10,10 @@ from gsheet_sync import (
     delete_restaurant_from_sheet,
     restaurant_exists
 )
+import numpy as np
+import time
+import streamlit as st
+
 
 
 def refresh_page():
@@ -273,9 +277,6 @@ elif page == '📋 Tableau':
 #                 df_probs = df[['nom', 'moyenne']].copy()
 #                 df_probs['Probabilité'] = probabilities
 #                 st.dataframe(df_probs.sort_values('Probabilité', ascending=False))
-import numpy as np
-import time
-import streamlit as st
 
 elif page == '📅 Choix aléatoire':
     st.title('🎰 Roulette du restaurant')
