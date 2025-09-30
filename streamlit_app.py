@@ -182,9 +182,13 @@ elif page == '📋 Tableau':
                 if restaurant_exists(nom.strip()):
                     update_restaurant_in_sheet(nom.strip(), marine, corentin, quentin, visites)
                     st.success(f'✅ {nom} mis à jour dans Google Sheets!')
+                    st.session_state['refresh'] = True
+                    st.rerun()  # Pour rafraîchir le tableau
                 else:
                     add_restaurant_to_sheet(nom.strip(), marine, corentin, quentin, visites)
                     st.success(f'✅ {nom} ajouté dans Google Sheets!')
+                    st.session_state['refresh'] = True
+                    st.rerun()  # Pour rafraîchir le tableau
                 
                 st.session_state['refresh'] = True
                 st.rerun()  # Pour rafraîchir le tableau
