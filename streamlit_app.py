@@ -139,10 +139,23 @@ if page == '📊 Graphiques':
                 hole=0.3,  # donut
                 labels={'visites': 'Nombre de visites'},
                 width=650, height=650,
-                itemwidth=30
             )
             fig3.update_traces(texttemplate='%{value}',
                                textfont_size=20)  # affiche les valeurs exactes
+            
+
+                        # Agrandir la légende
+            fig3.update_layout(
+                legend=dict(
+                    font=dict(size=18),  # taille des labels de la légende
+                    title=dict(text='Restaurants', font=dict(size=20)),  # optionnel : titre légende
+                    orientation="v",  # vertical
+                    x=1,  # position à droite
+                    y=0.5
+                ),
+                title_font_size=24  # taille du titre
+            )
+
             st.plotly_chart(fig3, use_container_width=True)
 
            
