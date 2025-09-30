@@ -255,7 +255,7 @@ elif page == '📅 Choix aléatoire':
 # ------------------------
 elif page == '⚙️ Admin':
     st.title('⚙️ Administration Google Sheets')
-
+    st.write('⚠️ Attention : Demander à Marine pour des changements !')
     df = read_sheet_to_df()
     if df.empty:
         st.info('ℹ️ Aucune donnée – ajoutez des restaurants dans Google Sheets')
