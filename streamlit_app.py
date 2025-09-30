@@ -139,13 +139,13 @@ if page == '📊 Graphiques':
                 hole=0.3,  # donut
                 labels={'visites': 'Nombre de visites'},
                 width=650, height=650,
-                legend=dict(itemwidth=30, itemheight=30)
+                itemwidth=30
             )
             fig3.update_traces(texttemplate='%{value}',
                                textfont_size=20)  # affiche les valeurs exactes
             st.plotly_chart(fig3, use_container_width=True)
 
-            
+           
 
 
 # ------------------------
