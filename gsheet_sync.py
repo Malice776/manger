@@ -2,8 +2,8 @@
 import os
 import gspread
 import pandas as pd
-from oauth2client.service_account import ServiceAccountCredentials
-
+from google.oauth2.service_account import Credentials
+import streamlit as st
 
 
 # Variables d'environnement
@@ -18,10 +18,15 @@ scope = [
     "https://www.googleapis.com/auth/drive"
 ]
 
+
 def get_gsheet_client():
-    """Retourne un client gspread autorisé"""
-    creds = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_CREDS_JSON, scope)
-    return gspread.authorize(creds)
+    scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+    creds = Credentials.from_service_account_info(
+        dict(st.secrets["gcp_service_account"]), scopes=scopes
+    )
+    client = gspread.authorize(creds)
+    return client
+
 
 def normalize_decimal(value):
     """Convertit les virgules en points pour les nombres"""
