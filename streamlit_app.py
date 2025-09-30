@@ -11,12 +11,17 @@ from gsheet_sync import (
     restaurant_exists
 )
 
+
+def refresh_page():
+    st.session_state['refresh_flag'] = not st.session_state.get('refresh_flag', False)
+
 st.set_page_config(layout='wide', page_title='Dashboard Restaurants')
 
 # Sidebar
 st.sidebar.title('🍽️ Navigation')
-page = st.sidebar.selectbox('Aller à', ['📊 Graphiques', '📋 Tableau', '📅 Choix aléatoire', '⚙️ Admin'])
-
+page = st.sidebar.selectbox('Aller à', ['📋 Tableau','📊 Graphiques', '📅 Choix aléatoire', '⚙️ Admin'])
+st.sidebar.button('Bouton magique 🎉', on_click=st.balloons)
+# st.sidebar.button('🔄 Rafraîchir', on_click=refresh_page)
 # ------------------------
 # Page Graphiques
 # ------------------------
@@ -255,7 +260,11 @@ elif page == '📅 Choix aléatoire':
 # ------------------------
 elif page == '⚙️ Admin':
     st.title('⚙️ Administration Google Sheets')
+
+    st.write(' ')
     st.write('⚠️ Attention : Demander à Marine pour des changements !')
+    st.write(' ')
+
     df = read_sheet_to_df()
     if df.empty:
         st.info('ℹ️ Aucune donnée – ajoutez des restaurants dans Google Sheets')
