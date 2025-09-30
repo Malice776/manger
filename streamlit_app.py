@@ -147,9 +147,8 @@ if page == '📊 Graphiques':
             fig3.update_layout(
                 title_font_size=32,          # taille du titre
                 legend=dict(
-                    font=dict(size=32)       # taille de la légende
+                    font=dict(size=32, color='red')       # taille de la légende
                 ),
-                legend_size=32
             )
 
 
