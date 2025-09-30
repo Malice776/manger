@@ -148,7 +148,8 @@ if page == '📊 Graphiques':
                 title_font_size=32,          # taille du titre
                 legend=dict(
                     font=dict(size=32)       # taille de la légende
-                )
+                ),
+                legend_size=32
             )
 
 
