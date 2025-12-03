@@ -4,6 +4,7 @@ plotly
 gspread
 oauth2client
 python-dotenv
-
+folium
+geopy
 # MongoDB plus nécessaire
 # pymongo
