@@ -300,7 +300,7 @@ elif page == '🗺️ Carte':
         else:
             center_lat = 48.85531573532454
             center_lon = 2.7815402176658344
-            m = folium.Map(location=[center_lat, center_lon], zoom_start=14)
+            m = folium.Map(location=[center_lat, center_lon], zoom_start=20)
             for _, row in df.iterrows():
                 popup_html = f"""
                 <b>{row['nom']}</b><br>
