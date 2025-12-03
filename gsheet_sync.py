@@ -9,7 +9,7 @@ import streamlit as st
 GOOGLE_CREDS_JSON = os.getenv("GOOGLE_CREDS_JSON", "./credentials/service_account.json")
 SHEET_ID = os.getenv("SHEET_ID", "14HCjCU-ejwi93ygofSetYDS0VlS4cXjcnjA9WqYx3Uk")
 WORKSHEET_NAME = os.getenv("SHEET_WORKSHEET_NAME", "Feuille 2")
-
+WORKSHEET_NAME2 = os.getenv("SHEET_WORKSHEET_NAME2", "Feuille 3")
 # Scopes Google API
 scope = [
     "https://spreadsheets.google.com/feeds",
@@ -117,6 +117,37 @@ def restaurant_exists(nom):
     if df.empty:
         return False
     return nom in df['nom'].values
+
+def read_sheet_to_df2():
+    """Lit la feuille Google Sheets et retourne un DataFrame Pandas"""
+    client = get_gsheet_client()
+    sh = client.open_by_key(SHEET_ID)
+    ws = sh.worksheet(WORKSHEET_NAME2)
+    data = ws.get_all_records()
+    df = pd.DataFrame(data)
+
+    if df.empty:
+        return df
+
+    # Nettoyage colonnes - garder la casse originale
+    df.columns = [c.strip() for c in df.columns]
+    
+    # Normaliser les colonnes numériques (virgules → points)
+    numeric_cols = ['Marine', 'Corentin', 'Quentin']
+    for col in numeric_cols:
+        if col in df.columns:
+            df[col] = df[col].apply(normalize_decimal)
+            df[col] = pd.to_numeric(df[col], errors='coerce')
+    
+    # Convertir "combien de fois on a mangé" en entier
+    if 'combien de fois on a mangé' in df.columns:
+        df['combien de fois on a mangé'] = pd.to_numeric(
+            df['combien de fois on a mangé'], errors='coerce'
+        ).fillna(0).astype(int)
+    
+    return df
+
+
 
 if __name__ == "__main__":
     df = read_sheet_to_df()

@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 import folium
 from gsheet_sync import (
     read_sheet_to_df,
+    read_sheet_to_df2,
     add_restaurant_to_sheet,
     update_restaurant_in_sheet,
     delete_restaurant_from_sheet,
@@ -217,7 +218,7 @@ elif page == '📋 Tableau':
 # ------------------------
 elif page == '📅 Choix aléatoire connu':
     st.title('🎰 Roulette du restaurant')
-    df = read_sheet_to_df()
+    df = read_sheet_to_df2()
     if df.empty:
         st.info('ℹ️ Aucune donnée – ajoutez des restaurants dans Google Sheets')
     else:
