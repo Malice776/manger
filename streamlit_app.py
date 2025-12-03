@@ -4,7 +4,7 @@ import numpy as np
 import time
 import plotly.express as px
 import plotly.graph_objects as go
-import foliums
+import folium
 from gsheet_sync import (
     read_sheet_to_df,
     add_restaurant_to_sheet,
