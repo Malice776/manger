@@ -92,7 +92,7 @@ if page == '📊 Graphiques':
                 xaxis=dict(showgrid=True, gridcolor='Gray', gridwidth=1),
                 yaxis=dict(showgrid=True, gridcolor='Gray', gridwidth=1)
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
         # Graphique 2 : Notes par personne
         st.subheader("👥 Notes par personne")
@@ -123,7 +123,7 @@ if page == '📊 Graphiques':
                     bargap=0.15,
                     bargroupgap=0.02
                 )
-                st.plotly_chart(fig2, use_container_width=True)
+                st.plotly_chart(fig2, width='stretch')
 
         # Graphique 3 : Nombre de visites
         st.subheader("🔢 Nombre de fois mangé par restaurant")
@@ -150,7 +150,7 @@ if page == '📊 Graphiques':
                 ),
                 title_font_size=24
             )
-            st.plotly_chart(fig3, use_container_width=True)
+            st.plotly_chart(fig3, width='stretch')
 
 # ------------------------
 # PAGE TABLEAU
@@ -166,7 +166,7 @@ elif page == '📋 Tableau':
         st.session_state['refresh'] = False
 
     if not df.empty:
-        st.dataframe(df, use_container_width=True, height=400)
+        st.dataframe(df, width='stretch', height=400)
         st.caption(f'Total: {len(df)} restaurants')
     else:
         st.info('📭 Aucune donnée. Ajoutez des restaurants dans Google Sheets.')
