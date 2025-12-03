@@ -298,8 +298,8 @@ elif page == '🗺️ Carte':
         if missing_cols:
             st.warning(f'⚠️ Les colonnes suivantes sont manquantes dans la feuille : {missing_cols}')
         else:
-            center_lat = 48.8690
-            center_lon = 2.7767
+            center_lat = 48.85531573532454
+            center_lon = 2.7815402176658344
             m = folium.Map(location=[center_lat, center_lon], zoom_start=14)
             for _, row in df.iterrows():
                 popup_html = f"""
