@@ -6,6 +6,7 @@ oauth2client
 python-dotenv
 folium
 geopy
-st_folium
+
+
 # MongoDB plus nécessaire
 # pymongo

@@ -4,8 +4,7 @@ import numpy as np
 import time
 import plotly.express as px
 import plotly.graph_objects as go
-import folium
-from streamlit_folium import st_folium
+import foliums
 from gsheet_sync import (
     read_sheet_to_df,
     add_restaurant_to_sheet,
@@ -312,7 +311,11 @@ elif page == '🗺️ Carte':
                     popup=popup_html,
                     tooltip=row['nom']
                 ).add_to(m)
-            st_folium(m, width=700, height=500)
+            import streamlit.components.v1 as components
+            m.save("map.html")
+            with open("map.html", "r", encoding="utf-8") as f:
+                components.html(f.read(), height=500)
+
 
 # ------------------------
 # PAGE ADMIN
